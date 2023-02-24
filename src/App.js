@@ -1,26 +1,20 @@
 import "./App.css";
-import { createContext, useState } from "react";
-import ComA from "./components/comA/ComA";
-
+import React from "react";
+import Com from "./components/Com";
+import Fetch from "./components/Fetch";
 //declared outside the function component as individual
-const AppDataContext = createContext();
-const SomeExtra = createContext();
 
 function App() {
-  const [data, setData] = useState("aryan");
-  const [newData, setNewData] = useState({ name: "Inu", lastName: "sharma" });
-  const [extra, setExtra] = useState({ little: "something Good" });
+  const data = Fetch("https://hub.dummyapis.com/employee?noofRecords=2&idStarts=1001");
+  console.log(data);
   return (
-    <AppDataContext.Provider value={{ data, newData }}>
-      <SomeExtra.Provider value={extra}>
+    
         <div className="App">
-          <h1>inside App </h1>
-          <ComA />
+          <h1>inside App</h1>
+          <Com/>
         </div>
-      </SomeExtra.Provider>
-    </AppDataContext.Provider>
   );
 }
 
 export default App;
-export { AppDataContext, SomeExtra };
+
