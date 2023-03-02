@@ -1,32 +1,18 @@
-import React, { useState, useMemo } from "react";
+import React,{memo} from "react";
 
-const Com = () => {
-  const [data, setData] = useState("");
-  const [count, setCount] = useState(0);
-
-  const longTime = (num) => {
-    for (let i = 0; i <= 1000000000000; i++) {
-      console.log("inside loop");
-      num = num + 1;
-      return num;
-    }
-  };
-  const calc = useMemo(() => {
-    longTime(count);
-  }, [count]);
-
-  // console.log("workin");
+const Com = ({ data, addData }) => {
+  console.log("inside child");
   return (
     <>
-      <div>
-        <button onClick={() => setCount(count + 1)}>Increment</button>
-        <h1>{count}</h1>
+      {data.map((item, index) => {
+       return (
+        <h1 key={index}>{item}</h1>
+        )
+      })}
 
-        <input value={data} onChange={(e) => setData(e.target.value)} />
-        <h1>{data}</h1>
-      </div>
+      <button onClick={() => addData()}>Add</button>
     </>
   );
 };
 
-export default Com;
+export default memo(Com);
